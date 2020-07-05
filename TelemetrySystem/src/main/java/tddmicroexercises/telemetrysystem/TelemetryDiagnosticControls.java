@@ -13,7 +13,7 @@ public class TelemetryDiagnosticControls {
         telemetryClient = client;
     }
 
-    public TelemetryDiagnostic checkTransmission() throws Exception {
+    public TelemetryDiagnostic checkTransmission() throws ConnectionException {
         telemetryClient.disconnect();
 
         int retryLeft = 3;
