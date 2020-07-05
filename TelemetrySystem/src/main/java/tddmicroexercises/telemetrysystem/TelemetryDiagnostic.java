@@ -1,11 +1,7 @@
 package tddmicroexercises.telemetrysystem;
 
 public class TelemetryDiagnostic {
-    private final String diagnosticInfo;
-
-    public TelemetryDiagnostic(){
-        diagnosticInfo = "";
-    }
+    private String diagnosticInfo = "";
 
     public TelemetryDiagnostic(String diagnosticInfo) {
         this.diagnosticInfo = diagnosticInfo;

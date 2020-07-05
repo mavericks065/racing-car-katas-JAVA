@@ -11,26 +11,28 @@ public class TelemetryDiagnosticControlsTest {
     public void checkTransmission_should_send_a_diagnostic_message_and_receive_a_status_message_response() throws Exception {
         // GIVEN
         var telemetryClient = mock(Client.class);
-        var telemetryDiagnosticControls = new TelemetryDiagnosticControls(telemetryClient);
+        var telemetryChannel = mock(Channel.class);
+        var telemetryDiagnosticControls = new TelemetryDiagnosticControls(telemetryClient, telemetryChannel);
         when(telemetryClient.getOnlineStatus()).thenReturn(true);
-        when(telemetryClient.receive()).thenReturn("it works");
+        when(telemetryChannel.receive()).thenReturn("it works");
 
         // WHEN
         var result = telemetryDiagnosticControls.checkTransmission();
 
         // THEN
         assertEquals("it works", result.getDiagnosticInfo());
-        verify(telemetryClient, times(1)).send(TelemetryClient.DIAGNOSTIC_MESSAGE);
+        verify(telemetryChannel, times(1)).send(telemetryChannel.DIAGNOSTIC_MESSAGE);
     }
 
     @Test
     public void checkTransmission_should_disconnect_and_if_online_status_is_false_reconnect() throws Exception {
         // GIVEN
         var telemetryClient = mock(Client.class);
-        var telemetryDiagnosticControls = new TelemetryDiagnosticControls(telemetryClient);
+        var telemetryChannel = mock(Channel.class);
+        var telemetryDiagnosticControls = new TelemetryDiagnosticControls(telemetryClient, telemetryChannel);
 
         doReturn(false).doReturn(true).when(telemetryClient).getOnlineStatus();
-        when(telemetryClient.receive()).thenReturn("it works");
+        when(telemetryChannel.receive()).thenReturn("it works");
 
         // WHEN
         var result = telemetryDiagnosticControls.checkTransmission();
@@ -45,7 +47,9 @@ public class TelemetryDiagnosticControlsTest {
     public void checkTransmission_should_throw_an_exception_if_cannot_reconnect_but_try_3_times() throws Exception {
         // GIVEN
         var telemetryClient = mock(Client.class);
-        var telemetryDiagnosticControls = new TelemetryDiagnosticControls(telemetryClient);
+        var telemetryChannel = mock(Channel.class);
+
+        var telemetryDiagnosticControls = new TelemetryDiagnosticControls(telemetryClient, telemetryChannel);
 
         when(telemetryClient.getOnlineStatus()).thenReturn(false);
 

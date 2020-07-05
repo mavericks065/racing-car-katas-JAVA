@@ -4,13 +4,11 @@ public class TelemetryDiagnosticControls {
     private static final String DIAGNOSTIC_CHANNEL_CONNECTION_STRING = "*111#";
 
     private final Client telemetryClient;
+    private final Channel telemetryChannel;
 
-    public TelemetryDiagnosticControls() {
-        this(new TelemetryClient());
-    }
-
-    public TelemetryDiagnosticControls(Client client) {
+    public TelemetryDiagnosticControls(Client client, Channel channel) {
         telemetryClient = client;
+        telemetryChannel = channel;
     }
 
     public TelemetryDiagnostic checkTransmission() throws ConnectionException {
@@ -26,7 +24,7 @@ public class TelemetryDiagnosticControls {
             throw new ConnectionException("Unable to connect.");
         }
 
-        telemetryClient.send(TelemetryClient.DIAGNOSTIC_MESSAGE);
-        return new TelemetryDiagnostic(telemetryClient.receive());
+        telemetryChannel.send(TelemetryChannel.DIAGNOSTIC_MESSAGE);
+        return new TelemetryDiagnostic(telemetryChannel.receive());
     }
 }
