@@ -14,8 +14,6 @@ public class TelemetryDiagnosticControls {
     }
 
     public TelemetryDiagnostic checkTransmission() throws Exception {
-        var diagnosticInfo = new TelemetryDiagnostic();
-
         telemetryClient.disconnect();
 
         int retryLeft = 3;
@@ -29,7 +27,6 @@ public class TelemetryDiagnosticControls {
         }
 
         telemetryClient.send(TelemetryClient.DIAGNOSTIC_MESSAGE);
-        diagnosticInfo.setDiagnosticInfo(telemetryClient.receive());
-        return diagnosticInfo;
+        return new TelemetryDiagnostic(telemetryClient.receive());
     }
 }
