@@ -23,7 +23,7 @@ public class TelemetryDiagnosticControls {
         }
 
         if (!telemetryClient.getOnlineStatus()) {
-            throw new Exception("Unable to connect.");
+            throw new ConnectionException("Unable to connect.");
         }
 
         telemetryClient.send(TelemetryClient.DIAGNOSTIC_MESSAGE);

@@ -50,7 +50,7 @@ public class TelemetryDiagnosticControlsTest {
         when(telemetryClient.getOnlineStatus()).thenReturn(false);
 
         // WHEN
-        var thrown = Assertions.assertThrows(Exception.class, () -> telemetryDiagnosticControls.checkTransmission());
+        var thrown = Assertions.assertThrows(ConnectionException.class, () -> telemetryDiagnosticControls.checkTransmission());
 
         // THEN
         Assertions.assertEquals("Unable to connect.", thrown.getMessage());
