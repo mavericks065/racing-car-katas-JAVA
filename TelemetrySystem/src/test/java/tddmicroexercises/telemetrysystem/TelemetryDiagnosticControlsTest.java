@@ -16,10 +16,10 @@ public class TelemetryDiagnosticControlsTest {
         when(telemetryClient.receive()).thenReturn("it works");
 
         // WHEN
-        telemetryDiagnosticControls.checkTransmission();
+        var result = telemetryDiagnosticControls.checkTransmission();
 
         // THEN
-        assertEquals("it works", telemetryDiagnosticControls.getDiagnosticInfo());
+        assertEquals("it works", result.getDiagnosticInfo());
         verify(telemetryClient, times(1)).send(TelemetryClient.DIAGNOSTIC_MESSAGE);
     }
 
@@ -33,10 +33,10 @@ public class TelemetryDiagnosticControlsTest {
         when(telemetryClient.receive()).thenReturn("it works");
 
         // WHEN
-        telemetryDiagnosticControls.checkTransmission();
+        var result = telemetryDiagnosticControls.checkTransmission();
 
         // THEN
-        assertEquals("it works", telemetryDiagnosticControls.getDiagnosticInfo());
+        assertEquals("it works", result.getDiagnosticInfo());
         verify(telemetryClient, times(1)).disconnect();
         verify(telemetryClient, times(1)).connect("*111#");
     }

@@ -4,7 +4,6 @@ public class TelemetryDiagnosticControls {
     private static final String DIAGNOSTIC_CHANNEL_CONNECTION_STRING = "*111#";
 
     private final Client telemetryClient;
-    private String diagnosticInfo = "";
 
     public TelemetryDiagnosticControls() {
         this(new TelemetryClient());
@@ -14,16 +13,8 @@ public class TelemetryDiagnosticControls {
         telemetryClient = client;
     }
 
-    public String getDiagnosticInfo() {
-        return diagnosticInfo;
-    }
-
-    public void setDiagnosticInfo(String diagnosticInfo) {
-        this.diagnosticInfo = diagnosticInfo;
-    }
-
-    public void checkTransmission() throws Exception {
-        diagnosticInfo = "";
+    public TelemetryDiagnostic checkTransmission() throws Exception {
+        var diagnosticInfo = new TelemetryDiagnostic();
 
         telemetryClient.disconnect();
 
@@ -38,6 +29,7 @@ public class TelemetryDiagnosticControls {
         }
 
         telemetryClient.send(TelemetryClient.DIAGNOSTIC_MESSAGE);
-        setDiagnosticInfo(telemetryClient.receive());
+        diagnosticInfo.setDiagnosticInfo(telemetryClient.receive());
+        return diagnosticInfo;
     }
 }
