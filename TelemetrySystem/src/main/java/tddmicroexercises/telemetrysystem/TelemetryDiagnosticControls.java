@@ -3,14 +3,14 @@ package tddmicroexercises.telemetrysystem;
 public class TelemetryDiagnosticControls {
     private final String DiagnosticChannelConnectionString = "*111#";
 
-    private final TelemetryClient telemetryClient;
+    private final Client telemetryClient;
     private String diagnosticInfo = "";
 
     public TelemetryDiagnosticControls() {
         this(new TelemetryClient());
     }
 
-    public TelemetryDiagnosticControls(TelemetryClient client) {
+    public TelemetryDiagnosticControls(Client client) {
         telemetryClient = client;
     }
 
