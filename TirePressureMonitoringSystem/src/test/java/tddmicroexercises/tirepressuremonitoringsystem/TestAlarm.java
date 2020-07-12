@@ -21,7 +21,7 @@ public class TestAlarm {
     @Test
     public void check_should_popNextPressurePsiValue_and_set_alarm_to_true_when_pressure_lower_than_17() {
         // GIVEN
-        var sensor = mock(Sensor.class);
+        var sensor = mock(TyreSensor.class);
         when(sensor.popNextPressurePsiValue()).thenReturn(Double.valueOf(11));
         var alarm = new Alarm(sensor);
 
@@ -35,7 +35,7 @@ public class TestAlarm {
     @Test
     public void check_should_popNextPressurePsiValue_and_set_alarm_to_true_when_pressure_hiwer_than_21() {
         // GIVEN
-        var sensor = mock(Sensor.class);
+        var sensor = mock(TyreSensor.class);
         when(sensor.popNextPressurePsiValue()).thenReturn(Double.valueOf(30));
         var alarm = new Alarm(sensor);
 
