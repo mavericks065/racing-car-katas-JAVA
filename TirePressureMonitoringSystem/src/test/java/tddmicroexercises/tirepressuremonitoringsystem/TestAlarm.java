@@ -10,9 +10,9 @@ import static org.mockito.Mockito.when;
 public class TestAlarm {
 
     @Test
-    public void alarm_should_be_instanciated_with_false_alarm() {
+    public void alarm_should_be_instantiated_with_false_alarm() {
         // GIVEN WHEN
-        Alarm alarm = new Alarm();
+        var alarm = new Alarm();
 
         // THEN
         assertEquals(false, alarm.isAlarmOn());
